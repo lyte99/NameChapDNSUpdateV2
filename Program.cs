@@ -32,16 +32,6 @@ namespace NameCheapDNSUpdate
         public static string strDynamicDNSPassword = "";  //api password
         
 
-        //OLD from main api code
-        //public static string strAPIUser = Environment.GetEnvironmentVariable("apiUser");    //api user name
-        //public static string strAPIKey = Environment.GetEnvironmentVariable("apiKey");      //api user key/password
-        //public static string strUserName = Environment.GetEnvironmentVariable("userName");  //api username
-        //public static string strClientIP = Environment.GetEnvironmentVariable("clientIP");  //client IP for request.
-        //public static string strTTL = Environment.GetEnvironmentVariable("TTL");            //"DNS TTL";
-
-
-
-
         static void Main(string[] args)
         {
             Console.WriteLine("Program Begin/FirstRun: " + System.DateTime.Now.ToString() +" UTC");
@@ -213,32 +203,6 @@ namespace NameCheapDNSUpdate
                 returnVal = false;
             }
 
-            //from old main api code
-            //if (strAPIUser == "" || strAPIUser == null)
-            //{
-            //    Console.WriteLine("apiUser environment variable cannnot be blank.");
-            //    returnVal = false;
-            //}
-            //if (strAPIKey == "" || strAPIKey == null)
-            //{
-            //    Console.WriteLine("strAPIKey environment variable cannnot be blank.");
-            //    returnVal = false;
-            //}
-            //if (strUserName == "" || strUserName == null)
-            //{
-            //    Console.WriteLine("userName environment variable cannnot be blank.");
-            //    returnVal = false;
-            //}
-            //if (strClientIP == "" || strClientIP == null)
-            //{
-            //    Console.WriteLine("clientIp environment variable cannnot be blank.");
-            //    returnVal = false;
-            //}
-            //if (strTTL == "" || strTTL == null)
-            //{
-            //    Console.WriteLine("TTL environment variable cannnot be blank.");
-            //    returnVal = false;
-            //}
 
             if (returnVal == false)
             {
@@ -342,58 +306,6 @@ namespace NameCheapDNSUpdate
         }
 
 
-        //OLD CODE FOR MAIN API
-        //public static List<Host> getHostsList(string domain, string strSLD, string strTLD)
-        //{
-
-        //    Console.WriteLine("Getting Hosts List for " + domain);
-
-
-        //    string URL = "https://api.namecheap.com/xml.response?";
-
-        //    //query parameters
-        //    URL += "ApiUser=" + strAPIUser;
-        //    URL += "&APIKey=" + strAPIKey;
-        //    URL += "&UserName=" + strUserName;
-        //    URL += "&Command=namecheap.domains.dns.getHosts";
-        //    URL += "&ClientIp=" + strClientIP;
-        //    URL += "&SLD=" + strSLD;
-        //    URL += "&TLD=" + strTLD;
-
-        //    Console.WriteLine("Get Hosts APi Request: " + URL);
-
-        //    try
-        //    {
-        //        //get host lists
-        //        Task<string> task = Task.Run(async () => await SendRequestGet(URL));
-        //        task.Wait();
-        //        string content = task.Result;
-
-        //        ApiResponse deserializedHostData = new ApiResponse();
-
-        //        //API response to object
-        //        XmlSerializer serializer = new XmlSerializer(typeof(ApiResponse));
-        //        using (StringReader reader = new StringReader(content))
-        //        {
-        //            deserializedHostData = (ApiResponse)serializer.Deserialize(reader);
-
-
-        //            Console.WriteLine("Host List Complete");
-
-        //            return deserializedHostData.CommandResponse.DomainDNSGetHostsResult.Host;
-
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine("Unable to retrieve hosts list.  Error: " + e.Message);
-
-        //        return null;
-        //    }
-
-
-        //}
-
         public static void setHostsIP(List<string> hosts, domain domainToRun, string newIPAddress, string appPassword)
         {
 
@@ -417,13 +329,6 @@ namespace NameCheapDNSUpdate
                 URL += "&password=" + appPassword;
                 URL += "&ip=" + newIPAddress;
 
-
-
-                ////OLD from main api
-                //URL += "&HostName" + (i + 1) + "=" + hosts[i].Name;
-                //URL += "&RecordType" + (i + 1) + "=" + hosts[i].Type;
-                //URL += "&Address" + (i + 1) + "=" + newIPAddress;
-                //URL += "&TTL" + (i + 1) + "=" + strTTL;
 
                 Console.WriteLine("Update DNS URL: " + URL);
 
