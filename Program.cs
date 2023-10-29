@@ -36,6 +36,9 @@ namespace NameCheapDNSUpdate
         {
             Console.WriteLine("Program Begin/FirstRun: " + System.DateTime.Now.ToString() +" UTC");
 
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandler);
+
+
             //startup tests
             Console.WriteLine("Startup Tests Begin: " + System.DateTime.Now.ToString() + " UTC");
             bool startupReady = startupCheck();
@@ -129,6 +132,24 @@ namespace NameCheapDNSUpdate
             }
 
         }
+
+        static void GlobalExceptionHandler(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception ex = (Exception)e.ExceptionObject;
+
+            // Log the exception details
+            Console.WriteLine($"Unhandled exception caught: {ex.Message}");
+            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+
+            // Perform any cleanup or resource release, if needed
+
+            // Optionally, terminate the application
+            if (e.IsTerminating)
+            {
+                Console.WriteLine("Application is terminating due to an unhandled exception.");
+            }
+        }
+
 
         public static bool startupCheck()
         {
@@ -447,7 +468,11 @@ namespace NameCheapDNSUpdate
 
             return responseString;
         }
+
+        
     }
+
+    
     public class PublicIP
     {
         public string ip { get; set; }
